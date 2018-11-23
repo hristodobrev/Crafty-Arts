@@ -1,0 +1,45 @@
+<div *ngIf="!loadProjectData">
+    <div class="row" *ngIf="project">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Review your project</h3><br/><br/>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-9" style="margin: auto;">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{project.jobNumber}}</div>
+                                        </div>
+                                        <div class="col-xs-9 text-left">
+                                            <div class="huge">{{project.title}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: left; padding: 10px;">
+                                    <div><b>Status:</b> {{project.status}}</div><br/>
+                                    <div><b>Started on:</b> {{project.date | date: 'dd/MM/yyyy'}}</div><br/>
+                                    <div><b>Created by:</b> {{project.creator.firstName}} {{project.creator.lastName}}</div><br/>
+                                    <div><b>Assigned to:</b> {{project.worker.firstName}} {{project.worker.lastName}}</div>
+                                </div>
+                                <div class="panel-footer">
+                                    <span *ngIf="isCreator || isWorker || isAdmin" class="pull-right"><a routerLink="/projects/comments/{{project._id}}">Review comments</a></span>
+                                    <span *ngIf="isCreator || isWorker || isAdmin" class="pull-left"><a  routerLink="/projects/edit/{{project._id}}">Update project information</a></span><br/>
+                                    <span class="pull-right"><a routerLink="/projects">Go back</a></span>
+                                    <span *ngIf="isCreator || isAdmin" class="pull-left"><a routerLink="/projects/delete/{{project._id}}">Delete</a></span>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loadProjectData" class="alert alert-danger">{{errorMessage}}</div>

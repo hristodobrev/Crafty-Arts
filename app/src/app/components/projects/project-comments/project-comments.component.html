@@ -1,0 +1,94 @@
+<div *ngIf="!loadComments">
+    <div class="row" *ngIf="project">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Review your project</h3><br/><br/>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-9" style="margin: auto;">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">{{project.jobNumber}}</div>
+                                        </div>
+                                        <div class="col-xs-9 text-left">
+                                            <div class="huge">{{project.title}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: left; padding: 10px;">
+                                    <div><b>Status:</b> {{project.status}}</div><br/>
+                                    <div><b>Started on:</b> {{project.date | date: 'dd/MM/yyyy'}}</div><br/>
+                                    <div><b>Created by:</b> {{project.creator?.firstName}} {{project.creator?.lastName}} ({{project.creator?.email}})</div><br/>
+                                    <div><b>Assigned to:</b> {{project.worker?.firstName}} {{project.worker?.lastName}} ({{project.worker?.email}})</div>
+                                </div>
+                                <div class="panel-footer">
+                                    <button class="btn btn-default"><a  routerLink="/projects/details/{{project._id}}">Go back</a></button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Add a comment</h3>
+                        <form (ngSubmit)="addComment()" #commentsProjectForm="ngForm" class="form-horizontal" >
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputContent">Comment</label>
+                                    <div class="col-sm-4 ">
+                                        <textarea type="text" class="form-control" id="inputContent" 
+                                        placeholder="Comment" 
+                                        name="content" 
+                                        required 
+                                        [(ngModel)]="newComment"
+                                        #content="ngModel"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-4">
+                                        <button type="reset" class="btn btn-default" (click)="clearComment()"><a routerLink="/projects/comments/{{project._id}}">Cancel</a></button>
+                                        <button [disabled]="!commentsProjectForm.form.valid" type="submit" class="btn btn-success">Add a comment</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="project.comments">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>All comments</h3><br/>
+                        <div class="postedComment" *ngFor="let comment of project.comments">
+                            <div class="postedCommentText">
+                                {{comment.content}}
+                            </div>
+                            <div class="comment-info">
+                                Posted by: {{comment.email.email}}<br/>
+                                Posted on: {{comment.commentDate | date: 'dd/MM/yyyy'}}
+                            </div>
+                            <button class="btn btn-default delete-comment-btn"><a routerLink="/projects/comments/{{project._id}}/editComment/{{comment._id}}">Edit comment</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div *ngIf="loadComments" class="alert alert-danger">{{errorMessage}}</div>

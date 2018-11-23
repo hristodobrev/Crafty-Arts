@@ -1,0 +1,45 @@
+<div *ngIf="!loadCommentFail && updateCommentFail">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Edit your comment (posted on: {{currentComment.commentDate | date: 'dd/MM/yyyy'}}):</h3>
+                    <br/>
+                    <form (ngSubmit)="editComment()" #editCommentForm="ngForm" class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="inputContent">Comment</label>
+                                <div class="col-sm-4 ">
+                                <textarea type="text" class="form-control" id="inputContent" 
+                                    placeholder="Comment" 
+                                    name="content" 
+                                    required 
+                                    value="{{currentComment.content}}"
+                                    [(ngModel)]="newComment"
+                                    #content="ngModel"
+                                    ></textarea>
+                                    <div [hidden]="content.valid || content.pristine" class="alert alert-danger">
+                                        Enter a comment.
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <button type="reset" class="btn btn-default"><a  routerLink="/projects/comments/{{projectId}}">Cancel</a></button>
+                                <button [disabled]="!editCommentForm.form.valid" type="submit" class="btn btn-success">Update</button>
+                                <button type="reset" class="btn btn-success" (click)="deleteComment()">Delete</button>
+                            </div>
+                            </div>
+                        </fieldset>   
+                    </form>
+                    <br/>
+                    <div *ngIf="!updateCommentFail" class="alert alert-danger">
+                        {{errorMessage}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loadCommentFail || !updateCommentFail" class="alert alert-danger">{{errorMessage}}</div>

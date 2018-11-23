@@ -1,0 +1,17 @@
+<div class="row" *ngIf="loadedData">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"><b>Profile information:</b></i></h3><br/>
+                <p><b>First name:</b> {{user.firstName}}</p>
+                <p><b>Last name:</b> {{user.lastName}}</p>
+                <p><b>Email:</b> {{user.email}}</p>
+                <p *ngIf="user.image"><b>Avatar:</b> <img class="image-avatar" src="http://localhost:7313/images/{{user.image}}"/></p>
+                <input type="file" #fileInput placeholder="Upload file..." />
+                <br/>
+                <button type="button" class="btn btn-success" (click)="upload()">Upload your profile picture</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!loadedData" class="alert alert-danger">{{errorMessage}}</div>

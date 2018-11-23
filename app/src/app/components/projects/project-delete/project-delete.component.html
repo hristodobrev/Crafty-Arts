@@ -1,0 +1,58 @@
+<div class="row" *ngIf="!loadProjectData">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Delete project</h3>
+                <form (ngSubmit)="deleteProject()" #deleteProjectForm="ngForm" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputJobNumber">Job number:</label>
+                            <div class="col-sm-4 ">
+                                {{project.jobNumber}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputTitle">Title</label>
+                            <div class="col-sm-4 ">
+                                {{project.title}}
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="project.worker">
+                             <label class="col-sm-4 control-label" for="inputWorker">Worker</label>
+                             <div class="col-sm-4 ">
+                                {{project.worker.firstName}} {{project.worker.lastName}} ({{project.worker.email}})
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputStatus">Status</label>
+                            <div class="col-sm-4 ">
+                                {{project.status}}
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="project.creator">
+                            <label class="col-sm-4 control-label" for="inputCreator">Creatd by:</label>
+                            <div class="col-sm-4 ">
+                                {{project.creator.firstName}} {{project.creator.lastName}} ({{project.creator.email}})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputDate">Creatd on:</label>
+                            <div class="col-sm-4 ">{{project.date | date: 'dd/MM/yyyy'}}</div>
+                        </div>
+                        <div class="form-group" *ngIf="project.updatedDate">
+                            <label class="col-sm-4 control-label" for="inputUpdatedDate">Last updated on:</label>
+                            <div class="col-sm-4 ">{{project.updatedDate | date: 'dd/MM/yyyy'}}</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <button type="reset" class="btn btn-default"><a routerLink="/projects/details/{{project._id}}">Cancel</a></button>
+                                <button type="submit" class="btn btn-success">Delete</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="loadProjectData" class="alert alert-danger">{{errorMessage}}</div>

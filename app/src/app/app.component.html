@@ -1,0 +1,22 @@
+<div id="wrapper">
+
+    <app-header></app-header>
+    
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Project Tracking System
+                </h1>
+            </div>
+        </div><!-- /.row -->
+        <h2 *ngIf="errorMessage" class="errorText">{{errorMessage}}</h2>
+        <router-outlet></router-outlet>
+      </div><!-- /.container-fluid -->
+    </div><!-- /#page-wrapper -->
+    <div>
+      <app-footer></app-footer>
+    </div>
+</div><!-- /#wrapper -->

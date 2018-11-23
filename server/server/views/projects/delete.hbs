@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Delete project</h3>
+                <form class="form-horizontal" method="post" action="/projects/delete/{{project.id}}">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputJobNumber">Job number:</label>
+                            <div class="col-sm-4 ">
+                                {{project.jobNumber}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputTitle">Title</label>
+                            <div class="col-sm-4 ">
+                                {{project.title}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                             <label class="col-sm-4 control-label" for="inputWorker">Worker</label>
+                             <div class="col-sm-4 ">
+                                {{project.worker.firstName}} {{project.worker.lastName}} ({{project.worker.email}})
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputStatus">Status</label>
+                            <div class="col-sm-4 ">
+                                {{project.status}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputCreator">Creatd by:</label>
+                            <div class="col-sm-4 ">
+                                {{project.creator.firstName}} {{project.creator.lastName}} ({{project.creator.email}})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputDate">Creatd on:</label>
+                            <div class="col-sm-4 ">{{dateFormat project.date "D MMMM YYYY"}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="inputUpdatedDate">Last updated on:</label>
+                            <div class="col-sm-4 ">{{dateFormat project.updatedDate "D MMMM YYYY"}}</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <button type="reset" class="btn btn-default"><a href="/projects/details/{{project.id}}">Cancel</a></button>
+                                <button type="submit" href="/projects/delete/{{project.id}}" class="btn btn-primary">Delete</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
