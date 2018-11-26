@@ -1,10 +1,13 @@
 {
-  "name": "project-tracking-system",
+  "name": "crafty-arts",
   "version": "1.0.0",
   "description": "Simple project tracking system (or ticketing system)",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix ../app",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -17,18 +20,19 @@
   },
   "homepage": "https://github.com/Michaela07313/Project-tracking-system#readme",
   "dependencies": {
-    "body-parser": "1.17.1",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "cookie-parser": "1.4.3",
     "cors": "^2.8.4",
-    "express": "4.15.2",
+    "express": "^4.16.4",
     "express-fileupload": "0.1.2",
-    "express-session": "1.15.2",
+    "express-session": "^1.15.6",
     "handlebars-dateformat": "^1.0.1",
     "handlebars-helpers": "0.8.2",
     "handlebars.moment": "1.0.4",
     "hbs": "4.0.1",
     "jsonwebtoken": "^8.1.0",
-    "moment": "2.18.1",
+    "moment": "^2.22.2",
     "mongodb": "^3.1.10",
     "mongoose": "4.9.5",
     "passport": "0.3.2",

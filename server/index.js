@@ -25,9 +25,7 @@ require('./server/config/passport')()
 //format the date of the projects
 hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
 
-
-
-app.listen(config.port)
+app.listen(config.port, () => console.log(`Server running on port ${config.port}`))
 console.log('Express app is running!')
 
 
